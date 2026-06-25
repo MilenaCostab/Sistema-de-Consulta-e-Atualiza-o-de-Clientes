@@ -1,0 +1,93 @@
+***********************************************************************
+* CLIMAP.BMS - MAPA BMS - CONSULTA DE CLIENTES
+* Transacao: CLIE  Programa: CLIPGM  Mapset: CLIMAPST
+***********************************************************************
+*
+* DFHMSD: Define o mapset completo.
+*   TYPE=DSECT  -> gera a estrutura de dados para o COBOL usar
+*   MODE=INOUT  -> mapa pode ser enviado e recebido
+*   LANG=COBOL  -> codigo gerado para COBOL
+*   CTRL=FREEKB -> libera o teclado apos envio
+*   STORAGE=AUTO-> cada mapa tem sua propria area
+*   TIOAPFX=YES -> prefixo necessario para CICS
+*
+CLIMAPST DFHMSD TYPE=DSECT,                                            X
+               MODE=INOUT,                                             X
+               LANG=COBOL,                                             X
+               CTRL=FREEKB,                                            X
+               STORAGE=AUTO,                                           X
+               TIOAPFX=YES
+
+CLIMAP   DFHMDI SIZE=(24,80),                                          X
+               LINE=1,                                                 X
+               COLUMN=1
+
+         DFHMDF POS=(1,1),LENGTH=40,                                   X
+               ATTRB=(PROT,ASKIP),COLOR=BLUE,                          X
+               INITIAL='**************************************** '
+         DFHMDF POS=(2,1),LENGTH=2,                                    X
+               ATTRB=(PROT,ASKIP),COLOR=BLUE,                          X
+               INITIAL='* '
+         DFHMDF POS=(2,4),LENGTH=20,                                   X
+               ATTRB=(PROT,ASKIP),COLOR=WHITE,                         X
+               INITIAL='CONSULTA DE CLIENTES'
+         DFHMDF POS=(2,38),LENGTH=2,                                   X
+               ATTRB=(PROT,ASKIP),COLOR=BLUE,                          X
+               INITIAL=' *'
+         DFHMDF POS=(3,1),LENGTH=40,                                   X
+               ATTRB=(PROT,ASKIP),COLOR=BLUE,                          X
+               INITIAL='**************************************** '
+
+         DFHMDF POS=(5,2),LENGTH=15,                                   X
+               ATTRB=(PROT,ASKIP),COLOR=GREEN,                         X
+               INITIAL='Codigo Cliente:'
+
+WCODCLI  DFHMDF POS=(5,18),LENGTH=6,                                   X
+               ATTRB=(UNPROT,NUM,IC),                                  X
+               COLOR=YELLOW
+
+         DFHMDF POS=(7,2),LENGTH=10,                                   X
+               ATTRB=(PROT,ASKIP),COLOR=GREEN,                         X
+               INITIAL='Nome......'
+
+WNOME    DFHMDF POS=(7,13),LENGTH=30,                                  X
+               ATTRB=(PROT,ASKIP),                                     X
+               COLOR=TURQUOISE
+
+         DFHMDF POS=(9,2),LENGTH=10,                                   X
+               ATTRB=(PROT,ASKIP),COLOR=GREEN,                         X
+               INITIAL='Telefone..'
+
+WTELEFONE DFHMDF POS=(9,13),LENGTH=15,                                 X
+               ATTRB=(UNPROT,IC),                                      X
+               COLOR=YELLOW
+
+         DFHMDF POS=(11,2),LENGTH=10,                                  X
+               ATTRB=(PROT,ASKIP),COLOR=GREEN,                         X
+               INITIAL='Cidade....'
+
+WCIDADE  DFHMDF POS=(11,13),LENGTH=20,                                 X
+               ATTRB=(UNPROT,IC),                                      X
+               COLOR=YELLOW
+
+         DFHMDF POS=(13,2),LENGTH=10,                                  X
+               ATTRB=(PROT,ASKIP),COLOR=GREEN,                         X
+               INITIAL='Mensagem..'
+
+WMENSAGEM DFHMDF POS=(13,13),LENGTH=30,                                X
+               ATTRB=(PROT,ASKIP),                                     X
+               COLOR=RED
+
+
+         DFHMDF POS=(22,2),LENGTH=8,                                   X
+               ATTRB=(PROT,ASKIP),COLOR=TURQUOISE,                     X
+               INITIAL='PF3=Sair'
+         DFHMDF POS=(23,2),LENGTH=13,                                  X
+               ATTRB=(PROT,ASKIP),COLOR=TURQUOISE,                     X
+               INITIAL='PF5=Consultar'
+         DFHMDF POS=(24,2),LENGTH=10,                                  X
+               ATTRB=(PROT,ASKIP),COLOR=TURQUOISE,                     X
+               INITIAL='PF6=Salvar'
+
+         DFHMSD TYPE=FINAL
+         END
